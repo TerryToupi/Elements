@@ -91,9 +91,7 @@ class ShadowMapPass:
         self._renderer._shadowMapDepthTexture = depth_texture
         self._renderer._shadowMapDepthTextureView = depth_texture_view 
 
-        # command_encoder = self._renderer._device.create_command_encoder()  
-
-        current_texture_view = texture.create_view()
+        # command_encoder = self._renderer._device.create_command_encoder()   
         render_pass = command_encoder.begin_render_pass( 
             color_attachments=[
                 {
