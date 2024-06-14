@@ -244,11 +244,12 @@ def draw_frame():
     renderer.render()
     canvas.request_draw()
 
-canvas.request_draw(draw_frame)
 
 while canvas._running:
     event = canvas.event_input_process();
-    scene.update(canvas, event)
+    scene.update(canvas, event) 
+
+    draw_frame()
 
     if canvas._need_draw:
         canvas.display()
