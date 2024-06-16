@@ -250,9 +250,6 @@ while canvas._running:
     scene.update(canvas, event) 
 
     draw_frame()
-
-    if canvas._need_draw:
-        canvas.display()
-        canvas.display_post()
+    canvas.display()
 
 canvas.shutdown()
