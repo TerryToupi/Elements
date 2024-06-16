@@ -57,7 +57,7 @@ class ModelPass:
         } 
 
         self.depth_stencil = {
-            "format": wgpu.TextureFormat.depth24plus,
+            "format": wgpu.TextureFormat.depth32float,
             "depth_write_enabled": True,
             "depth_compare": wgpu.CompareFunction.less_equal,
         }
@@ -68,13 +68,13 @@ class ModelPass:
                 mip_level_count=1,
                 sample_count=1,
                 dimension="2d",
-                format=wgpu.TextureFormat.depth24plus,
+                format=wgpu.TextureFormat.depth32float,
                 usage=wgpu.TextureUsage.RENDER_ATTACHMENT
             )
 
         depth_texture_view : wgpu.GPUTextureView = depth_texture.create_view(
             label="depth_texture_view",
-            format=wgpu.TextureFormat.depth24plus,
+            format=wgpu.TextureFormat.depth32float,
             dimension="2d",
             aspect=wgpu.TextureAspect.depth_only,
             base_mip_level=0,

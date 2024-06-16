@@ -20,11 +20,8 @@ class ShadowMapPass:
         )
 
     def render(self, command_encoder):  
-        texture = self._renderer._canvasContext
-        texture_format = self._renderer._canvasContextFormat
-        textureWidth = texture.width; 
-        textureHeight = texture.height;
-
+        texture_format = self._renderer._canvasContextFormat 
+        
         self.colorBlend = [ 
             {   
                 "format": texture_format,
@@ -91,7 +88,8 @@ class ShadowMapPass:
         self._renderer._shadowMapDepthTexture = depth_texture
         self._renderer._shadowMapDepthTextureView = depth_texture_view 
 
-        # command_encoder = self._renderer._device.create_command_encoder()   
+        # command_encoder = self._renderer._device.create_command_encoder()  
+
         render_pass = command_encoder.begin_render_pass( 
             color_attachments=[
                 {
