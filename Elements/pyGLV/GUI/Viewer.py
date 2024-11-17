@@ -294,7 +294,7 @@ class GLFWWindow(WgpuAutoGui, WgpuCanvasBase, RenderWindow):
     :type RenderWindow: [type]
     """ 
     
-    def __init__(self, *, wgpu:bool = False, windowWidth = None, windowHeight = None, windowTitle = None, scene = None, eventManager = None, openGLveriosn = 4, **kwargs): 
+    def __init__(self, *, wgpu:bool = False, windowWidth = None, windowHeight = None, windowTitle = None, vsync=None, scene = None, eventManager = None, openGLveriosn = 4, **kwargs): 
         """Constructor GLFWWindow for basic GLFW parameters
 
         :param windowWidth: [description], defaults to None
@@ -316,7 +316,8 @@ class GLFWWindow(WgpuAutoGui, WgpuCanvasBase, RenderWindow):
         self.openGLversion = openGLveriosn  
        
         # Enable wgpu rendering 
-        self.wgpu = wgpu
+        self.wgpu = wgpu 
+        self._vsync = bool(vsync)
         
         if windowWidth is None: 
             self._windowWidth = 1024
@@ -502,9 +503,9 @@ class GLFWWindow(WgpuAutoGui, WgpuCanvasBase, RenderWindow):
             # print(f"SDL2Window:display() set wireframemode: {self._wireframeMode}")  
             
         elif self.wgpu: 
-            if self._need_draw:
-                self._need_draw = False;
-                self._draw_frame_and_present() 
+            # if self._need_draw:
+            #     self._need_draw = False;
+            self._draw_frame_and_present() 
 
         # print(f'{self.getClassName()}: display()')
 
@@ -531,6 +532,10 @@ class GLFWWindow(WgpuAutoGui, WgpuCanvasBase, RenderWindow):
     
     def GetMousePos(self): 
         return self._pointer_pos
+    
+    def IsButtonPressed(self, button:int): 
+        _state = True if button in self._pointer_buttons else False  
+        return _state
     
     def event_input_process(self, running = True):   
         glfw.poll_events()   
@@ -733,6 +738,8 @@ class GLFWWindow(WgpuAutoGui, WgpuCanvasBase, RenderWindow):
         ev = {  
             "x": self._pointer_pos[0], 
             "y": self._pointer_pos[1],
+            "width": self._windowWidth,
+            "height": self._windowHeight,
             "button": 0, 
             "buttons": list(self._pointer_buttons),
             "modifiers": list(self._key_modifiers)

@@ -31,6 +31,7 @@ setup(
         'setuptools>=61',
         'wheel',
         'numpy',
+        'trimesh', 
         'scipy',
         'imgui',
         'PyOpenGL',
@@ -39,7 +40,7 @@ setup(
         'pysdl2',
         'pysdl2-dll', 
         'glfw',
-        'wgpu', 
+        'wgpu==0.14', 
         'cffi',  
         'PyGLM',
         'jupyter-rfb',
@@ -49,10 +50,10 @@ setup(
         'scikit-spatial',
         'bezier',
         'clifford',
-        'trimesh',
         'pyganja',
         'open3d',
-        'pyassimp==4.1.3'
+        'pyassimp==4.1.3',
+        'assertpy'
     ],
     
 
